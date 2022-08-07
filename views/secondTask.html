@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<form id='first'>
+		<div>
+			<div>
+				<div>
+					<button id='lastButton' type='submit'>Кнопка типа отправления</button>
+				</div>
+			</div>
+		</div>
+		
+	</form>
+
+	<form id='second' action="#">
+		<button id='thirdButton'>Кнопка обычного типа</button>
+	</form>
+
+	<form id='third' action='#'>
+		<button id='secondButton' type='reset'>Кнопка типа reset</button>
+	</form>
+
+	<button id='firstButton'>Отправить</button>
+</body>
+<script type="text/javascript">
+
+	document.addEventListener("DOMContentLoaded", function(){
+		
+		function findAllParents(elem,parents){
+			if(elem.parentNode.tagName.toLowerCase() != 'body'){
+				parents.push(elem.parentNode.tagName.toLowerCase());
+				findAllParents(elem.parentNode,parents);
+			}
+			return parents;
+		}
+
+
+		var forms=document.getElementsByTagName('form');
+		for (var i=0;i<forms.length;i++){
+			console.log(forms[i].id);
+		}
+
+
+		var buttons=document.getElementsByTagName('button');
+		for (var i=0;i<buttons.length;i++){
+			if(buttons[i].getAttribute('type')!='reset' && findAllParents(buttons[i],[]).indexOf ('form') !== -1){
+				console.log(buttons[i].id);
+			}
+		}
+	});
+</script>
+</html>
